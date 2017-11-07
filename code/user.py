@@ -3,13 +3,13 @@ from flask_restful import Resource, reqparse
 
 
 class User:
-    def __init__(self, _id, username, password):  # id is a python keyword
+    def __init__(self, _id, username, password):  # id is a python keyword, so we use _id
         self.id = _id
         self.username = username
         self.password = password
 
     @classmethod
-    def find_by_username(cls, username):  #cls was 'self before we went to classmethod'
+    def find_by_username(cls, username):  #cls was 'self' before we went to classmethod'
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
 
@@ -46,9 +46,10 @@ class User:
 
 class UserRegister(Resource):
     parser = reqparse.RequestParser()
+
     parser.add_argument('username',
         type=str,
-        required=True, #all requests must have prices
+        required=True,
         help="this field cannot be left blank"
     )
     parser.add_argument('password',
@@ -60,7 +61,6 @@ class UserRegister(Resource):
 
 
     def post(self):
-
         data = UserRegister.parser.parse_args()
 
         # CHECK IF USER ALREADY EXISTS - must be before the rest of route

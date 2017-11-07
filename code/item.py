@@ -11,8 +11,6 @@ class Item(Resource):
         help="this field cannot be left blank"
     )
 
-
-
     @jwt_required()
     def get(self, name):
         item = self.find_by_name(name)
@@ -55,9 +53,7 @@ class Item(Resource):
             # 400 - something went wrong with the request
 
         data = Item.parser.parse_args()
-
-
-        # WE DID HAVE THIS HERE BUT WE NEED THE SAME IN PUT ROUTE
+        # WE DID HAVE THE FOLLOWING LINES HERE BUT WE NEED THE SAME IN PUT ROUTE
         # item = {'name': name, 'price': data['price']}
         # connection = sqlite3.connect('data.db')
         # cursor = connection.cursor()
